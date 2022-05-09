@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SkyWay - Room example</title>
+    <link rel="stylesheet" href="../_shared/style.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="heading">Room example</h1>
+      <p class="note">
+        Change Room mode (before join in a room):
+        <a href="#sfu">sfu</a>
+      </p>
+      <div class="room">
+          <video id="js-local-stream"></video>
+          <span id="js-room-mode"></span>:
+          <input type="text" placeholder="Room Name" id="js-room-id">
+          <button id="js-join-trigger">Join</button>
+          <button id="js-leave-trigger">Leave</button>
+
+        <div class="remote-streams" id="js-remote-streams"></div>
+
+        <div>
+          <pre class="messages" id="js-messages"></pre>
+          <input type="text" id="js-local-text">
+          <button id="js-send-trigger">Send</button>
+        </div>
+      </div>
+      <p class="meta" id="js-meta"></p>
+    </div>
+    <script src="//cdn.webrtc.ecl.ntt.com/skyway-4.4.3.js"></script>
+    <script src="./key.js"></script>
+    <script src="./script.js"></script>
+    <script type="text/javascript">
+      function ElementRequestFullscreen(element){
+		var list = [
+			"requestFullscreen",
+			"webkitRequestFullScreen",
+			"mozRequestFullScreen",
+			"msRequestFullscreen"
+		];
+		var i;
+		var num = list.length;
+		for(i=0;i < num;i++){
+			if(element[list[i]]){
+				element[list[i]]();
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+	// ------------------------------------------------------------
+	// エレメントを取得
+	// ------------------------------------------------------------
+	// aaa という ID 属性のエレメントを取得する
+	var element = document.getElementById("js-local-stream");
+
+	// ------------------------------------------------------------
+	// エレメントをクリックすると実行されるイベント
+	// ------------------------------------------------------------
+	element.onclick = function (e){
+
+		// エレメントをフルスクリーン表示する
+		ElementRequestFullscreen(element);
+
+	};
+    </script>
+  </body>
+</html>
